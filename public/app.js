@@ -1,44 +1,56 @@
 const toCurrency = price => {
-  return new Intl.NumberFormat('ru-RU', {
-    currency: 'rub',
+  return new Intl.NumberFormat('can', {
+    currency: 'can',
     style: 'currency'
   }).format(price)
+}
+
+const toDate = date => {
+  return new Intl.DateTimeFormat('en-US', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(date))
 }
 
 document.querySelectorAll('.price').forEach(node => {
   node.textContent = toCurrency(node.textContent)
 })
 
-const currentCard = document.querySelector('.basket');
+document.querySelectorAll('.date').forEach(node => {
+  node.textContent = toDate(node.textContent)
+})
 
-if (currentCard) {
-  currentCard.addEventListener('click', event => {
-    console.log(currentCard);
-    console.log('----');
+const currentCart = document.querySelector('.basket');
+
+if (currentCart) {
+  currentCart.addEventListener('click', event => {
     if (event.target.classList.contains('remove-course')) {
       const id = event.target.dataset.id;
-      console.log(2,currentCard);
+      console.log(2,currentCart);
       
-      fetch('/card/remove/' + id, { method: 'delete' })
+      fetch('/cart/remove/' + id, { method: 'delete' })
       .then(res => res.json())
-        .then(card => {
-          console.log(card)
-          if (card.courses.length) {
-            const html = card.courses.map(c => {
+        .then(cart => {
+          console.log(cart)
+          if (cart.courses.length) {
+            const html = cart.courses.map(c => {
               return `
               <tr>
                 <td>${c.title}</td>
                 <td>${c.count}</td>
                 <td>
-                  <button class="btn btm-small remove-course" data-id="${c.id}">Удалить</button>
+                  <button class="btn btm-small remove-course" data-id="${c.id}">Delete</button>
                 </td>
               </tr>
               `
             }).join('')
-            currentCard.querySelector('tbody').innerHTML = html
-            currentCard.querySelector('.price').textContent = toCurrency(card.price)
+            currentCart.querySelector('tbody').innerHTML = html
+            currentCart.querySelector('.price').textContent = toCurrency(cart.price)
           } else {
-            currentCard.innerHTML = '<p>Корзина пуста</p>'
+            currentCart.innerHTML = '<p>Cart is empty</p>'
           }
         })
     }

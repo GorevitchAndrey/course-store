@@ -1,4 +1,5 @@
-# Node.js express.js training project
+# Training project with using Node.js, express.js, Mongo, Handlebars
+
 Сourse store
 Implemented course creation, editing and adding / deleting in the basket
 

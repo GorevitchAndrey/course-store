@@ -17,6 +17,8 @@
     <label for="img">URL image</label>
     <span class="helper-text" data-error="Enter url image"></span>
   </div>
+  {{!-- token --}}
+  <input type="hidden" name="_csrf" value="{{ csrf }}">
 
   <button class="btn btn-primary">Add course</button>
 </form>

@@ -29,9 +29,14 @@ if (currentCart) {
   currentCart.addEventListener('click', event => {
     if (event.target.classList.contains('remove-course')) {
       const id = event.target.dataset.id;
-      console.log(2,currentCart);
+      const csrf = event.target.dataset.csrf;
       
-      fetch('/cart/remove/' + id, { method: 'delete' })
+      fetch('/cart/remove/' + id, { 
+        method: 'delete',
+        headers: {
+          'X-XSRF-TOKEN': csrf
+        }
+      })
       .then(res => res.json())
         .then(cart => {
           console.log(cart)
@@ -56,4 +61,6 @@ if (currentCart) {
     }
     
   })
-} 
+}
+
+M.Tabs.init(document.querySelectorAll('.tabs'));

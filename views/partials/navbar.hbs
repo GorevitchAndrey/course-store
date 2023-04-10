@@ -1,12 +1,17 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Courses App</a>
+    <a href="/" class="brand-logo">Courses App</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li class={{#if isHome}} active {{/if}}><a href="/">Main</a></li>
       <li class={{#if isCourses}} active {{/if}}><a href="/courses">Courses</a></li>
-      <li class={{#if isAdd}} active {{/if}}><a href="/add">Add course</a></li>
-      <li class={{#if isCart}} active {{/if}}><a href="/cart">Cart</a></li>
-      <li class={{#if isOrder}} active {{/if}}><a href="/orders">Orders</a></li>
+      {{#if isAuth}}
+        <li class={{#if isAdd}} active {{/if}}><a href="/add">Add course</a></li>
+        <li class={{#if isCart}} active {{/if}}><a href="/cart">Cart</a></li>
+        <li class={{#if isOrder}} active {{/if}}><a href="/orders">Orders</a></li>
+        <li><a href="/auth/logout">Log out</a></li>
+      {{else}}
+        <li class={{#if isLogin}} active {{/if}}><a href="/auth/login">Login</a></li>
+      {{/if}}
     </ul>
   </div>
 </nav>

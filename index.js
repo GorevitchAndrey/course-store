@@ -16,10 +16,10 @@ const routeOrders = require('./routes/orders');
 const routeAuth = require('./routes/auth');
 const variableMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
+const keys = require('./keys');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const MONGODB_URI = 'mongodb+srv://dochorevych:4dc8pgzn8rifn5@node-with-mongodb.yneou6k.mongodb.net/shop'
 
 const hbs = handlebar.create({
   defaultLayout: 'main',
@@ -29,7 +29,7 @@ const hbs = handlebar.create({
 
 const store = new MongoStore({
   collection: 'sessions',
-  uri: MONGODB_URI
+  uri: keys.MONGODB_URI
 })
 
 app.engine('hbs', hbs.engine);
@@ -39,7 +39,7 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }))
 app.use(session({
-  secret: 'secret value',
+  secret: keys.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: store
@@ -62,7 +62,7 @@ mongoose.set('strictQuery', true);
 
 const connectDatabase = async () => {
   try {
-    await mongoose.connect(MONGODB_URI,
+    await mongoose.connect(keys.MONGODB_URI,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

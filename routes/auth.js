@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const sendgrid = require('nodemailer-sendgrid-transport');
 const User = require('../models/user');

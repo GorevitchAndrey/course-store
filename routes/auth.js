@@ -6,6 +6,7 @@ const sendgrid = require('nodemailer-sendgrid-transport');
 const User = require('../models/user');
 const keys = require('../keys');
 const regEmail = require('../emails/registration');
+const resetEmail = require('../emails/reset');
 const router = Router();
 
 const transporter = nodemailer.createTransport(sendgrid({

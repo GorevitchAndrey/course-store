@@ -25,6 +25,7 @@ const hbs = handlebar.create({
   defaultLayout: 'main',
   extname: 'hbs',
   handlebars: allowInsecurePrototypeAccess(Handlebars),
+  helpers: require('./utils/hbs-helpers')
 })
 
 const store = new MongoStore({

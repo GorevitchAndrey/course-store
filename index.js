@@ -16,6 +16,7 @@ const routeOrders = require('./routes/orders');
 const routeAuth = require('./routes/auth');
 const variableMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
+const errorHandler = require('./middleware/error');
 const keys = require('./keys');
 
 const PORT = process.env.PORT || 3001;
@@ -58,6 +59,8 @@ app.use('/courses', routeCourses);
 app.use('/cart', cartRoutes);
 app.use('/orders', routeOrders);
 app.use('/auth', routeAuth);
+
+app.use(errorHandler);
 
 mongoose.set('strictQuery', true);
 

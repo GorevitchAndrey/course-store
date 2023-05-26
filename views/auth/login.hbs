@@ -37,7 +37,7 @@
         <p class="alert">{{registerError}}</p>
       {{/if}}
       <h1>Create account</h1>
-      <form action="/auth/register#register" method="POST">
+      <form action="/auth/register#register" novalidate method="POST">
         <div class="input-field">
           <input id="remail" name="email" type="email" class="validate" required>
           <label for="remail">Email</label>

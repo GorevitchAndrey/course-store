@@ -1,25 +1,29 @@
-<h1>Edit {{course.title}}</h1>
+<h1> {{title}}</h1>
 
-<form action="/courses/edit" method="POST" class="course-form">
+{{#if error}}
+  <p class="alert">{{ error }}</p>
+{{/if}}
+
+<form action="/courses/edit" method="POST" class="course-form" novalidate>
   <div class="input-field">
-    <input id="title" name="title" type="text" class="validate" required value="{{course.title}}">
+    <input id="title" name="title" type="text" class="validate" value="{{data.title}}" required>
     <label for="title">Name course</label>
     <span class="helper-text" data-error="Enter name"></span>
   </div>
 
   <div class="input-field">
-    <input d="price" name="price" type="number" class="validate" required min="1" value="{{course.price}}">
+    <input d="price" name="price" type="number" class="validate" required min="1" value="{{data.price}}">
     <label for="price">Price course</label>
     <span class="helper-text" data-error="Enter price"></span>
   </div>
 
   <div class="input-field">
-    <input id="img" name="img" type="text" class="validate" required value="{{course.img}}">
+    <input id="img" name="img" type="text" class="validate" required value="{{data.img}}">
     <label for="img">URL image</label>
     <span class="helper-text" data-error="Enter url image"></span>
   </div>
 
-  <input type="hidden" name="id" value="{{course.id}}">
+  <input type="hidden" name="id" value="{{data.id}}">
   {{!-- token --}}
   <input type="hidden" name="_csrf" value="{{ csrf }}">
 
@@ -29,6 +33,6 @@
 <form action="/courses/remove" method="POST">
   {{!-- token --}}
   <input type="hidden" name="_csrf" value="{{ csrf }}">
-  <input type="hidden" name="id" value="{{course.id}}">
+  <input type="hidden" name="id" value="{{data.id}}">
   <button class="btn red">Delete</button>
 </form>
